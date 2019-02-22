@@ -14,7 +14,7 @@ export class FavoritePage implements OnInit {
   favoriteQuotes: IQuote[];
 
   constructor(private quoteService: QuoteService,
-              private modalCtrl : ModalController) { }
+    private modalCtrl: ModalController) { }
 
   ngOnInit() { }
 
@@ -22,16 +22,21 @@ export class FavoritePage implements OnInit {
     this.favoriteQuotes = this.quoteService.getFavoriteQuote();
   }
 
-  onQuoteSel(quote: IQuote){
-    const modal = this.modalCtrl.create(QuotePage, {quote : quote});
+  onQuoteSel(quote: IQuote) {
+    const modal = this.modalCtrl.create(QuotePage, { quote: quote });
     modal.present();
 
     modal.onDidDismiss(bool => {
-      if(bool){
+      if (bool) {
         this.quoteService.removeQuoteFromFavorite(quote);
         this.favoriteQuotes = this.quoteService.getFavoriteQuote();
       }
-    })
+    });
 
+  }
+
+  onSlideDelete(quote: IQuote) {
+    this.quoteService.removeQuoteFromFavorite(quote);
+    this.favoriteQuotes = this.quoteService.getFavoriteQuote();
   }
 }

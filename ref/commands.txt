@@ -1,0 +1,19 @@
+> npm install ionic@3 cordova@7 -g
+
+// Creating new ionic app
+> ionic start [app_name, template]
+
+// Add the platform - android (Android Studio)/ iOS (XCode)
+> ionic cordova platform add android
+
+// Building the App
+> ionic cordova build android
+
+// emulate / run the App
+> ionic cordova emulate android [--device]
+
+
+ - Android SDK
+ - jdk v1.8
+ - build repositories
+ - configure the path variables
