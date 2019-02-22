@@ -12,14 +12,14 @@
     </ion-card-header>
     <ion-card-content>
       <p>{{ quote.text }} <br>
-         <span class="author"> - {{ quote.person }}</span></p>
+         <span class="author" text-left> - {{ quote.person }}</span></p>
     </ion-card-content>
 
-    <ion-col>
+    <ion-col *ngIf="!isFavorite(quote)">
       <button ion-button clear (click)="onFavorite(quote)">Favorite</button>
     </ion-col>
-    <ion-col>
-      <button ion-button clear color="danger">Unfavorite</button>
+    <ion-col *ngIf="isFavorite(quote)">
+      <button ion-button clear color="danger" (click)="onUnfavorite(quote)">Unfavorite</button>
     </ion-col>
 
   </ion-card>

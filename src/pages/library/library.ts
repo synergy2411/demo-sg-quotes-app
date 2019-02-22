@@ -16,11 +16,11 @@ export class LibraryPage implements OnInit{
 
   ngOnInit(){
     this.quotesCollection = QUOTES_DATA;
-    console.log("Collection : ", this.quotesCollection);
+    // console.log("Collection : ", this.quotesCollection);
   }
   
   onQuoteCategorySel(quoteCategory : { category: string, quotes: IQuote[],icon: string}){
-    console.log("SEL CATEGORY : " , quoteCategory);
+    // console.log("SEL CATEGORY : " , quoteCategory);
     this.navCtrl.push(QuotesPage, {category : quoteCategory});
   }
 
