@@ -1,12 +1,6 @@
+import { IQuote } from './../../model/quote.model';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the QuotesPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -15,11 +9,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class QuotesPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  quoteGroup : { category: string, quotes: IQuote[],icon: string};
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad QuotesPage');
+  constructor(private navParams : NavParams){
+    console.log("RECEIVED", this.navParams.data);
+    this.quoteGroup = this.navParams.get('category');
   }
 
 }
