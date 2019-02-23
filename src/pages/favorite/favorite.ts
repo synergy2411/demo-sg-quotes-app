@@ -1,4 +1,5 @@
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Geolocation } from '@ionic-native/geolocation';
 import { QuotePage } from './../quote/quote';
 import { QuoteService } from './../../services/quote.service';
 import { IQuote } from './../../model/quote.model';
@@ -17,7 +18,29 @@ export class FavoritePage implements OnInit {
   constructor(private quoteService: QuoteService,
     private modalCtrl: ModalController,
     private camera: Camera,
-    private alertCtrl : AlertController) { }
+    private alertCtrl : AlertController,
+    private geolocation : Geolocation) { }
+
+    getLocation(){
+      this.geolocation.getCurrentPosition()
+        .then(position => {
+          const alert = this.alertCtrl.create({
+            title : "My Location",
+            message : 'Latitude : ' + position.coords.latitude + "\nLongitude : "
+              + position.coords.longitude
+          });
+          alert.present();
+        })
+        .catch(err => {
+          console.log(err);
+          const alert = this.alertCtrl.create({
+            title : "Error",
+            message : 'Can"t locate the user'
+          });
+          alert.present();
+        })
+    }
+
 
   openCamera() {
     const options: CameraOptions = {
