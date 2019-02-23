@@ -1,8 +1,9 @@
+import { Camera, CameraOptions } from '@ionic-native/camera';
 import { QuotePage } from './../quote/quote';
 import { QuoteService } from './../../services/quote.service';
 import { IQuote } from './../../model/quote.model';
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, ModalController } from 'ionic-angular';
+import { IonicPage, ModalController, AlertController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -14,7 +15,28 @@ export class FavoritePage implements OnInit {
   favoriteQuotes: IQuote[];
 
   constructor(private quoteService: QuoteService,
-    private modalCtrl: ModalController) { }
+    private modalCtrl: ModalController,
+    private camera: Camera,
+    private alertCtrl : AlertController) { }
+
+  openCamera() {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    this.camera.getPicture(options)
+      .then((picture)=>{
+        const alert = this.alertCtrl.create({
+          title : "Camera Piture",
+          message : picture,
+          buttons : ['OK']
+        });
+        alert.present();
+      })
+  }
+
 
   ngOnInit() { }
 
